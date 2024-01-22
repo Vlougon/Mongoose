@@ -12,6 +12,7 @@ const personSchema = new Schema({
 
 let Person = mongoose.model('Person', personSchema);
 
+
 const createAndSavePerson = (done) => {
   let person = new Person({ name: 'Juan', age: 26, favoriteFoods: ['Tacos', 'Quesadilla'] });
 
@@ -56,9 +57,10 @@ const findEditThenSave = (personId, done) => {
 
   Person.findById(personId, function (err, data) {
     data.favoriteFoods.push(foodToAdd);
-    data.save();
-    if (err) return done(err);
-    done(null, data);
+    data.save(function (err, updated) {
+      if (err) return done(err);
+      done(null, updated);
+    });
   });
 };
 
