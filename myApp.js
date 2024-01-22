@@ -34,6 +34,7 @@ personName = { name: 'Juan' };
 
 const findPeopleByName = (personName, done) => {
   Person.find(personName);
+  done(null, data);
 };
 
 const findOneByFood = (food, done) => {
